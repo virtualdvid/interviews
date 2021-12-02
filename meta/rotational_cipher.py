@@ -1,6 +1,10 @@
-Rotational Cipher
-One simple way to encrypt a string is to "rotate" every alphanumeric character by a certain amount. Rotating a character means replacing it with another character that is a certain number of steps away in normal alphabetic or numerical order.
-For example, if the string "Zebra-493?" is rotated 3 places, the resulting string is "Cheud-726?". Every alphabetic character is replaced with the character 3 letters higher (wrapping around from Z to A), and every numeric character replaced with the character 3 digits higher (wrapping around from 9 to 0). Note that the non-alphanumeric characters remain unchanged.
+"""Rotational Cipher
+One simple way to encrypt a string is to "rotate" every alphanumeric character by a certain amount.
+Rotating a character means replacing it with another character that is a certain number of steps away in normal alphabetic or numerical order.
+For example, if the string "Zebra-493?" is rotated 3 places, the resulting string is "Cheud-726?".
+Every alphabetic character is replaced with the character 3 letters higher (wrapping around from Z to A),
+and every numeric character replaced with the character 3 digits higher (wrapping around from 9 to 0).
+Note that the non-alphanumeric characters remain unchanged.
 Given a string and a rotation factor, return an encrypted string.
 Signature
 string rotationalCipher(string input, int rotationFactor)
@@ -16,13 +20,12 @@ output = Cheud-726?
 Example 2
 input = abcdefghijklmNOPQRSTUVWXYZ0123456789
 rotationFactor = 39
-output = nopqrstuvwxyzABCDEFGHIJKLM9012345678
+output = nopqrstuvwxyzABCDEFGHIJKLM9012345678"""
 
-import math
-# Add any extra import statements you may need here
+
 import string
 
-# Add any helper functions you may need here
+
 ABC_LOWER = list(string.ascii_lowercase)
 ABC_UPPER = list(string.ascii_uppercase)
 NUMBERS = [1,2,3,4,5,6,7,8,9,0]
@@ -34,12 +37,29 @@ LEN_MAP = {
 }
 
 def list_rotation(index: int, key: str, rotator_factor: int) -> int:
-  """returns rotated index"""
+  """returns rotated index
+
+  Args:
+      index (int): current index in string
+      key (str): hash map key
+      rotator_factor (int): rotator factor
+
+  Returns:
+      int: rotated index
+  """
   return (index + rotator_factor) % LEN_MAP[key]
 
 
-def rotationalCipher(input, rotation_factor):
-  # Write your code here
+def rotationalCipher(input: str, rotation_factor: int) -> str:
+  """encripts string by a rotation factor
+
+  Args:
+      input (str): string to encrypt
+      rotation_factor (int): rotator factor
+
+  Returns:
+      str: encrypted string
+  """
   if not input or not rotation_factor:
     return input
   input = list(input)
@@ -68,37 +88,34 @@ def rotationalCipher(input, rotation_factor):
 def printString(string):
   print('[\"', string, '\"]', sep='', end='')
 
-test_case_number = 1
+TEST_CASE_NUMBER = 1
 
 def check(expected, output):
-  global test_case_number
+  global TEST_CASE_NUMBER
   result = False
   if expected == output:
     result = True
-  rightTick = '\u2713'
-  wrongTick = '\u2717'
+  rightTick = '\u2713 '
+  wrongTick = '\u2717 '
   if result:
-    print(rightTick, 'Test #', test_case_number, sep='')
+    print(rightTick, 'Test #', TEST_CASE_NUMBER, sep='')
   else:
-    print(wrongTick, 'Test #', test_case_number, ': Expected ', sep='', end='')
+    print(wrongTick, 'Test #', TEST_CASE_NUMBER, ': Expected ', sep='', end='')
     printString(expected)
     print(' Your output: ', end='')
     printString(output)
     print()
-  test_case_number += 1
+  TEST_CASE_NUMBER += 1
 
 if __name__ == "__main__":
-  input_1 = "All-convoYs-9-be:Alert1."
-  rotation_factor_1 = 4
-  expected_1 = "Epp-gsrzsCw-3-fi:Epivx5."
-  output_1 = rotationalCipher(input_1, rotation_factor_1)
-  check(expected_1, output_1)
+  INPUT_1 = "All-convoYs-9-be:Alert1."
+  ROTATION_FACTOR_1 = 4
+  EXPECTED_1 = "Epp-gsrzsCw-3-fi:Epivx5."
+  OUTPUT_1 = rotationalCipher(INPUT_1, ROTATION_FACTOR_1)
+  check(EXPECTED_1, OUTPUT_1)
 
-  input_2 = "abcdZXYzxy-999.@"
-  rotation_factor_2 = 200
-  expected_2 = "stuvRPQrpq-999.@"
-  output_2 = rotationalCipher(input_2, rotation_factor_2)
-  check(expected_2, output_2)
-
-  # Add your own test cases here
-  
+  INPUT_2 = "abcdZXYzxy-999.@"
+  ROTATION_FACTOR_2 = 200
+  EXPECTED_2 = "stuvRPQrpq-999.@"
+  OUTPUT_2 = rotationalCipher(INPUT_2, ROTATION_FACTOR_2)
+  check(EXPECTED_2, OUTPUT_2)
