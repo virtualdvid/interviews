@@ -26,30 +26,6 @@ output = nopqrstuvwxyzABCDEFGHIJKLM9012345678"""
 import string
 
 
-ABC_LOWER = list(string.ascii_lowercase)
-ABC_UPPER = list(string.ascii_uppercase)
-NUMBERS = [1,2,3,4,5,6,7,8,9,0]
-
-LEN_MAP = {
-  'abc_lower_len': len(ABC_LOWER),
-  'abc_upper_len': len(ABC_UPPER),
-  'numbers_len': len(NUMBERS)
-}
-
-def list_rotation(index: int, key: str, rotator_factor: int) -> int:
-  """returns rotated index
-
-  Args:
-      index (int): current index in string
-      key (str): hash map key
-      rotator_factor (int): rotator factor
-
-  Returns:
-      int: rotated index
-  """
-  return (index + rotator_factor) % LEN_MAP[key]
-
-
 def rotationalCipher(input: str, rotation_factor: int) -> str:
   """encripts string by a rotation factor
 
@@ -62,21 +38,21 @@ def rotationalCipher(input: str, rotation_factor: int) -> str:
   """
   if not input or not rotation_factor:
     return input
+  abc_lower = list(string.ascii_lowercase)
+  abc_upper = list(string.ascii_uppercase)
   input = list(input)
   output = []
   for i in input:
     if i.islower():
-      index = ABC_LOWER.index(i)
-      rotated_index = list_rotation(index, 'abc_lower_len', rotation_factor)
-      output.append(ABC_LOWER[rotated_index])
+      index = abc_lower.index(i)
+      rotated_index = (index + rotation_factor) % len(abc_lower)
+      output.append(abc_lower[rotated_index])
     elif i.isupper():
-      index = ABC_UPPER.index(i)
-      rotated_index = list_rotation(index, 'abc_upper_len', rotation_factor)
-      output.append(ABC_UPPER[rotated_index])
+      index = abc_upper.index(i)
+      rotated_index = (index + rotation_factor) % len(abc_upper)
+      output.append(abc_upper[rotated_index])
     elif i.isdigit():
-      index = NUMBERS.index(int(i))
-      rotated_index = list_rotation(index, 'numbers_len', rotation_factor)
-      output.append(str(NUMBERS[rotated_index]))
+      output.append(str(int(i) + rotation_factor)[-1])
     else:
       output.append(i)
   return "".join(output)
@@ -107,15 +83,21 @@ def check(expected, output):
     print()
   TEST_CASE_NUMBER += 1
 
-if __name__ == "__main__":
-  INPUT_1 = "All-convoYs-9-be:Alert1."
+if __name__ == '__main__':
+  INPUT_1 = 'All-convoYs-9-be:Alert1.'
   ROTATION_FACTOR_1 = 4
-  EXPECTED_1 = "Epp-gsrzsCw-3-fi:Epivx5."
+  EXPECTED_1 = 'Epp-gsrzsCw-3-fi:Epivx5.'
   OUTPUT_1 = rotationalCipher(INPUT_1, ROTATION_FACTOR_1)
   check(EXPECTED_1, OUTPUT_1)
 
-  INPUT_2 = "abcdZXYzxy-999.@"
+  INPUT_2 = 'abcdZXYzxy-999.@'
   ROTATION_FACTOR_2 = 200
-  EXPECTED_2 = "stuvRPQrpq-999.@"
+  EXPECTED_2 = 'stuvRPQrpq-999.@'
   OUTPUT_2 = rotationalCipher(INPUT_2, ROTATION_FACTOR_2)
   check(EXPECTED_2, OUTPUT_2)
+
+  INPUT_3 = 'abcdZXYzxy-999.@'
+  ROTATION_FACTOR_3 = 0
+  EXPECTED_3 = 'abcdZXYzxy-999.@'
+  OUTPUT_3 = rotationalCipher(INPUT_3, ROTATION_FACTOR_3)
+  check(EXPECTED_3, OUTPUT_3)
