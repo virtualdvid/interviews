@@ -37,6 +37,26 @@ def numberOfWays(arr: list, k: int) -> int:
       int: total different pairs found in the array
   """
   i = 0
+  output = 0
+  arr.sort()
+  for i, value in enumerate(arr):
+    if value > k: break
+    target = k - value
+    output += arr[i+1:].count(target)
+  return output
+
+
+def numberOfWays2(arr: list, k: int) -> int:
+  """calculates the number of pairs in a given array
+
+  Args:
+      arr (list): list of integers to evaluate
+      k (int): target pair sum value
+
+  Returns:
+      int: total different pairs found in the array
+  """
+  i = 0
   l = 1
   output = 0
   arr.sort()
@@ -65,8 +85,8 @@ def check(expected, output):
   result = False
   if expected == output:
     result = True
-  rightTick = '\u2713'
-  wrongTick = '\u2717'
+  rightTick = '\u2713 '
+  wrongTick = '\u2717 '
   if result:
     print(rightTick, 'Test #', TEST_CASE_NUMBER, sep='')
   else:
