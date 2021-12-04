@@ -41,9 +41,11 @@ def numberOfWays(arr: list, k: int) -> int:
   output = 0
   arr.sort()
   while i < len(arr):
+    if arr[i] > k:
+      break
     if i + l < len(arr) and arr[i] + arr[i + l] == k:
       output += 1
-    if i + l == len(arr) or arr[i] > k or arr[i] + arr[i + l] > k:
+    if i + l == len(arr) or arr[i] + arr[i + l] > k:
       i += 1
       l = 0
     l += 1
