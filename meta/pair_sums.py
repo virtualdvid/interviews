@@ -26,8 +26,11 @@ There's one valid pair 1+5, and three different valid pairs 3+3
 (the 3rd and 4th elements, 3rd and 5th elements, and 4th and 5th elements)."""
 
 
+from time import time
+
+
 def numberOfWays(arr: list, k: int) -> int:
-  """calculates the number of pairs in a given array
+  """(Opt1) calculates the number of pairs in a given array
 
   Args:
       arr (list): list of integers to evaluate
@@ -47,7 +50,8 @@ def numberOfWays(arr: list, k: int) -> int:
 
 
 def numberOfWays2(arr: list, k: int) -> int:
-  """calculates the number of pairs in a given array
+  """(Opt2) calculates the number of pairs in a given array
+  (fastest option)
 
   Args:
       arr (list): list of integers to evaluate
@@ -85,8 +89,8 @@ def check(expected, output):
   result = False
   if expected == output:
     result = True
-  rightTick = '\u2713 '
-  wrongTick = '\u2717 '
+  rightTick = '\u2713'
+  wrongTick = '\u2717'
   if result:
     print(rightTick, 'Test #', TEST_CASE_NUMBER, sep='')
   else:
@@ -98,6 +102,7 @@ def check(expected, output):
   TEST_CASE_NUMBER += 1
 
 if __name__ == "__main__":
+  start = time()
   K_1 = 6
   ARR_1 = [1, 2, 3, 4, 3]
   EXPECTED_1 = 2
@@ -109,3 +114,19 @@ if __name__ == "__main__":
   EXPECTED_2 = 4
   OUTPUT_2 = numberOfWays(ARR_2, K_2)
   check(EXPECTED_2, OUTPUT_2)
+  opt1 = time()-start
+  
+  start = time()
+  K_1 = 6
+  ARR_1 = [1, 2, 3, 4, 3]
+  EXPECTED_1 = 2
+  OUTPUT_1 = numberOfWays2(ARR_1, K_1)
+  check(EXPECTED_1, OUTPUT_1)
+
+  K_2 = 6
+  ARR_2 = [1, 5, 3, 3, 3]
+  EXPECTED_2 = 4
+  OUTPUT_2 = numberOfWays2(ARR_2, K_2)
+  check(EXPECTED_2, OUTPUT_2)
+  opt2 = time()-start
+  print('opt1 < opt2: ', opt1 < opt2)
