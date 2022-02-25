@@ -1,5 +1,5 @@
 """Contiguous Subarrays
-You are given an array arr of N integers. For each index i, 
+You are given an array arr of N integers. For each index i,
 you are required to determine the number of contiguous subarrays that fulfill the following conditions:
 The value at index i must be the maximum element in the contiguous subarrays, and
 These contiguous subarrays must either start from or end on index i.
@@ -31,6 +31,8 @@ def count_subarrays(arr: list) -> list:
   Returns:
       list: list of contiguous subarrays
   """
+  # if not(isinstance(arr, list)):
+  #   raise TypeError('Use a list of integers as input.')
   i = 0
   l = 1
   r = 1
@@ -110,7 +112,7 @@ if __name__ == "__main__":
   EXPECTED_1 = [1, 3, 1, 5, 1]
   OUTPUT_1 = count_subarrays(TEST_1)
   check(EXPECTED_1, OUTPUT_1)
-  
+
   TEST_2 = [2, 4, 7, 1, 5, 3]
   EXPECTED_2 = [1, 2, 6, 1, 3, 1]
   OUTPUT_2 = count_subarrays(TEST_2)
