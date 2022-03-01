@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
   N_2 = 4
   A_2 = [1, 2, 3, 4]
-  B_2 = [1, 2, 3, 5]  
+  B_2 = [1, 2, 3, 5]
   EXPECTED_2 = False
   OUTPUT_2 = are_they_equal(A_2, B_2)
   check(EXPECTED_2, OUTPUT_2)

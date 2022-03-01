@@ -36,6 +36,11 @@ def rotationalCipher(input: str, rotation_factor: int) -> str:
   Returns:
       str: encrypted string
   """
+  if not isinstance(input, str):
+    raise TypeError('Input must be a string.')
+  if not isinstance(rotation_factor, int):
+    raise TypeError('Input must be a integer.')
+
   if not input or not rotation_factor:
     return input
   abc_lower = list(string.ascii_lowercase)
@@ -56,6 +61,12 @@ def rotationalCipher(input: str, rotation_factor: int) -> str:
     else:
       output.append(i)
   return "".join(output)
+
+def user():
+  password = input('please provide password: ')
+  rotation_factor = input('please provide rotational factor: ')
+  output = rotationalCipher(password, rotation_factor)
+  return f'password encrypted: {output}'
 
 
 # These are the tests we use to determine if the solution is correct.
